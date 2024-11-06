@@ -24,7 +24,7 @@ export default {
           indexName: 'articles_index', // Meilisearch index name
           format: 'ndjson', // Choice between 'json' and 'ndjson'
           collection: 'api::article.article', // Strapi Collection
-          fields: ['title', 'content', 'author', 'categories'],
+          fields: ['title', 'content', 'author'],
           populate: ['categories'], 
           transformEntry: ({ entry }: { entry: any }) => {
             return {

@@ -2,6 +2,13 @@
 
 # Changelog
 
+## [0.2.1] - 2024-11-06
+### Update README for populate
+
+## [0.2.0] - 2024-11-06
+### Public repository
+- Add public repository link in package.json.
+
 ## [0.1.2] - 2024-11-06
 ### Fix escape key to close modal
 - Fix escape key to close modal.
