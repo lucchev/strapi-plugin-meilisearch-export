@@ -1,5 +1,5 @@
 {
-  "version": "0.1.2",
+  "version": "0.2.0",
   "keywords": [],
   "type": "commonjs",
   "exports": {
@@ -69,6 +69,6 @@
   "author": "Luc Chevalier <github@lucchevalier.net>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/lucchevalier/strapi-plugin-meilisearch-export"
+    "url": "https://github.com/lucchev/strapi-plugin-meilisearch-export.git"
   }
 }
