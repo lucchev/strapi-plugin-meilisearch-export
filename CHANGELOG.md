@@ -2,6 +2,10 @@
 
 # Changelog
 
+## [0.2.3] - 2024-11-08
+### Fix published entities
+- Fix published entities to allow export of published entities.
+
 ## [0.2.2] - 2024-11-08
 ### Fix permissions
 - Add permissions to allow access to the plugin page.

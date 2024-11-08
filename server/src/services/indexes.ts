@@ -29,13 +29,10 @@ export default ({ strapi }: { strapi: Core.Strapi }) => ({
           limit: pageSize,
           offset: page * pageSize,
           populate: populate,
-          filters: {
-            publishedAt: {
-              $notNull: true
-            }
-          }
+          status: 'published'
+
         });
-        //strapi.log.info('Found ' + pageEntities.length + ' entities ' + pageEntities);
+        console.log('Found ' + pageEntities.length + ' entities ' + JSON.stringify(pageEntities));
 
         if (pageEntities.length === 0) break;
 

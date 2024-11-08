@@ -25,5 +25,6 @@
   "meilisearch-export.updateSettingsTitle": "Update Settings",
   "meilisearch-export.rebuildIndexTitle": "Rebuild Index",
   "meilisearch-export.deleteIndexTitle": "Delete Index",
-  "meilisearch-export.permissions.not-allowed": "You are not allowed to access this page"
+  "meilisearch-export.permissions.not-allowed": "You are not allowed to access this page",
+  "meilisearch-export.selectIndex": "Select an index"
 }
