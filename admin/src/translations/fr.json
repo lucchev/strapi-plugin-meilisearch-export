@@ -24,5 +24,6 @@
   "meilisearch-export.actionConfirmed": "Action confirmée",
   "meilisearch-export.updateSettingsTitle": "Mettre à jour les paramètres",
   "meilisearch-export.rebuildIndexTitle": "Reconstruire l'index",
-  "meilisearch-export.deleteIndexTitle": "Supprimer l'index"
+  "meilisearch-export.deleteIndexTitle": "Supprimer l'index",
+  "meilisearch-export.permissions.not-allowed": "Vous n'avez pas la permission d'accéder à cette page"
 }

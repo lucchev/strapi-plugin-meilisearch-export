@@ -2,6 +2,12 @@
 
 # Changelog
 
+## [0.2.2] - 2024-11-08
+### Fix permissions
+- Add permissions to allow access to the plugin page.
+- Confirmation button for actions fixed to the right.
+- Only published elements are taken into account for rebuild (if the 'Draft & publish' mode is used).
+
 ## [0.2.1] - 2024-11-06
 ### Update README for populate
 

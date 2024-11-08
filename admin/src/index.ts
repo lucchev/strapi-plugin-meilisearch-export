@@ -5,17 +5,22 @@ import { pluginId } from './pluginId';
 export default {
   register(app: any) {
     app.addMenuLink({
-      to: `plugins/${pluginId}`,
+      to: `/plugins/${pluginId}`,
       icon: PluginIcon,
       intlLabel: {
         id: `${pluginId}.plugin.name`,
         defaultMessage: pluginId,
       },
       Component: async () => {
-        const { App } = await import(/* webpackChunkName: "meilisearch-export" */ './pages/App');
-
+        const { App } = await import('./pages/App');
         return App;
       },
+      permissions: [
+        {
+          action: `plugin::${pluginId}.read`,
+          subject: null
+        }
+      ]
     });
 
     app.registerPlugin({

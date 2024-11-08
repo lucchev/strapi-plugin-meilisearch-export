@@ -68,6 +68,12 @@ The plugin adds a new page in the Strapi admin interface, accessible via the mai
 - Manage configuration:
   - Update settings: Synchronizes search settings (searchableAttributes, etc.) with Meilisearch based on the plugin configuration in `config/plugins.ts`
 
+## Internationalization
+If the collection uses internationalization, the indexes will have as a suffix `_${locale}` for each locale.
+
+## Permissions
+The plugin adds a permission in the RBAC system to allow access to the plugin page.
+
 ## Contributions
 Contributions are welcome! Please open an issue or submit a pull request if you have suggestions or corrections.
 

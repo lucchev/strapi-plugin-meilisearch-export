@@ -9,9 +9,10 @@ import {
   SingleSelectOption,
   Typography,
 } from '@strapi/design-system'
-import { useFetchClient } from '@strapi/strapi/admin'
+import { useFetchClient, useRBAC } from '@strapi/strapi/admin'
 import { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
+import ModalWrapper, { type ModalContent } from '../components/Modal'
 import { pluginId } from '../pluginId'
 import { isCollectionLocalized } from '../utils/fetchCollectionLocalization'
 import { getTrad } from '../utils/getTrad'
@@ -23,13 +24,6 @@ type Index = {
 
 type InternationalizedIndexName = Index & {
   internationalizedIndexName: string
-}
-
-type ModalContent = {
-  title: string
-  message: string
-  confirmText: string
-  actionConfirmed: string
 }
 
 const HomePage = () => {
@@ -44,6 +38,15 @@ const HomePage = () => {
   const [isActionConfirmed, setIsActionConfirmed] = useState(false)
 
   const { get, del, put, post } = useFetchClient()
+
+  const { isLoading, allowedActions } = useRBAC({
+    actions: [
+      {
+        action: `plugin::${pluginId}.read`,
+        subject: null,
+      },
+    ],
+  })
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,7 +70,6 @@ const HomePage = () => {
 
   useEffect(() => {
     const updateLocalizedIndexes = async () => {
-      // For each index, check if the collection is localized
       const localizedIndexes: InternationalizedIndexName[] = []
       for (const index of indexes) {
         const collection = index.collection
@@ -107,6 +109,22 @@ const HomePage = () => {
       window.removeEventListener('keydown', handleKeyDown)
     }
   }, [isModalVisible])
+
+  if (isLoading) {
+    return null
+  }
+
+  if (!allowedActions.canRead) {
+    return (
+      <Main>
+        <Box padding={8}>
+          <Typography variant='alpha'>
+            {formatMessage({ id: getTrad('permissions.not-allowed') })}
+          </Typography>
+        </Box>
+      </Main>
+    )
+  }
 
   const showModal = (action: () => void, content: ModalContent) => {
     setModalAction(() => action)
@@ -291,47 +309,12 @@ const HomePage = () => {
           </Grid.Root>
         </Box>
 
-        <Modal.Content>
-          <Modal.Header>
-            <Modal.Title>{modalContent?.title}</Modal.Title>
-            <Button
-              onClick={handleCloseModal}
-              variant='tertiary'
-              style={{ position: 'absolute', right: '1.6rem', top: '1.6rem' }}
-            >
-              X
-            </Button>
-          </Modal.Header>
-          <Modal.Body>
-            {isActionConfirmed ? (
-              <Typography>{modalContent?.actionConfirmed}</Typography>
-            ) : (
-              modalContent?.message.split('\n').map((line, index) => (
-                <Box marginBottom={0} key={index}>
-                  <Typography>{line}</Typography>
-                </Box>
-              ))
-            )}
-          </Modal.Body>
-          <Modal.Footer>
-            {isActionConfirmed ? (
-              <Button onClick={handleCloseModal} variant='success'>
-                {formatMessage({ id: getTrad('close') })}
-              </Button>
-            ) : (
-              <>
-                <Modal.Close>
-                  <Button onClick={handleCloseModal} variant='tertiary'>
-                    {formatMessage({ id: getTrad('cancel') })}
-                  </Button>
-                </Modal.Close>
-                <Button onClick={handleConfirm} variant='success'>
-                  {modalContent?.confirmText}
-                </Button>
-              </>
-            )}
-          </Modal.Footer>
-        </Modal.Content>
+        <ModalWrapper
+          modalContent={modalContent}
+          handleCloseModal={handleCloseModal}
+          handleConfirm={handleConfirm}
+          isActionConfirmed={isActionConfirmed}
+        />
       </Modal.Root>
     </Main>
   )

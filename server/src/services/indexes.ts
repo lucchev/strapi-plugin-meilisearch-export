@@ -28,7 +28,12 @@ export default ({ strapi }: { strapi: Core.Strapi }) => ({
           fields: fields,
           limit: pageSize,
           offset: page * pageSize,
-          populate: populate
+          populate: populate,
+          filters: {
+            publishedAt: {
+              $notNull: true
+            }
+          }
         });
         //strapi.log.info('Found ' + pageEntities.length + ' entities ' + pageEntities);
 

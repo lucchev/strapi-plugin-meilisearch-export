@@ -37,7 +37,6 @@ export const getExportInfos = async (strapi: Core.Strapi, contentTypeUID: UID.Co
   // Get the entry if required
   const entry = getEntry ? await strapi.documents(contentTypeUID).findOne({documentId: documentId, fields: fields, populate: collectionConfig.populate, locale: locale}) : null;
 
-  console.log('entry', entry, getEntry, documentId);
   // Check if the entry exists
   if (getEntry && !entry) {
     throw new Error(`Entity not found for content type: ${contentTypeUID} and documentId: ${documentId}`);

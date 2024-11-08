@@ -47,4 +47,12 @@ export default ({ strapi }: { strapi: Core.Strapi }) => {
       }
     });
   }
+
+  // Correction de l'enregistrement des permissions
+  strapi.admin.services.permission.actionProvider.register({
+    uid: 'read',
+    displayName: 'Access Meilisearch Export',
+    pluginName: pluginId,
+    section: 'plugins',
+  });
 };
